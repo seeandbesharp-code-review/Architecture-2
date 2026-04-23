@@ -1,0 +1,100 @@
+<div class="raffle-page" style="direction: rtl; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; height: 80vh; overflow: hidden; padding: 20px; box-sizing: border-box;">
+  
+  <div style="max-width: 1400px; margin: 0 auto; height: 100%; display: grid; grid-template-columns: 280px 1fr 320px; gap: 20px; align-items: stretch;">
+    
+    <div style="background: white; border-radius: 25px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1.5px solid #f3e5f5; display: flex; flex-direction: column; overflow: hidden;">
+      <h3 style="color: #6a1b9a; margin-top: 0; padding-bottom: 15px; border-bottom: 2px solid #f3e5f5; display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+        🎁 בחר מתנה
+      </h3>
+      <div style="overflow-y: auto; flex-grow: 1; padding-left: 5px; margin-top: 10px;">
+        @for (gift of gifts(); track gift.idGift) {
+          <div (click)="selectGift(gift)" 
+               [style.background]="currentGift()?.idGift === gift.idGift ? '#f3e5f5' : (gift.isDrawn ? '#f9f9f9' : 'white')"
+               [style.border-color]="gift.isDrawn ? '#2e7d32' : (currentGift()?.idGift === gift.idGift ? '#6a1b9a' : '#eee')"
+               style="padding: 12px; margin-bottom: 10px; border-radius: 15px; cursor: pointer; transition: all 0.2s; border: 1.5px solid; display: flex; align-items: center; gap: 10px; position: relative;">
+            
+            @if (gift.isDrawn) {
+              <div style="position: absolute; top: -5px; left: -5px; background: #2e7d32; color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.8em; z-index: 5; border: 2px solid white;">✔</div>
+            }
+
+            <div style="width: 40px; height: 40px; background: #fafafa; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+               @if (gift.image && gift.image !== 'string') {
+                 <img [src]="imageUrl + gift.image" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+               } @else { 🎁 }
+            </div>
+
+            <div style="flex-grow: 1;">
+              <div [style.text-decoration]="gift.isDrawn ? 'line-through' : 'none'" [style.color]="gift.isDrawn ? '#888' : '#4a148c'" style="font-weight: bold; font-size: 0.9em;">
+                {{ gift.name }}
+              </div>              @if (gift.isDrawn && gift.user) {
+                <div style="font-size: 0.75em; color: #2e7d32; font-weight: 600; margin-top: 2px;">
+                  🏆 {{ gift.user.firstName }} {{ gift.user.lastName }}
+                </div>
+              }            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div style="background: white; border-radius: 40px; padding: 40px; box-shadow: 0 20px 60px rgba(106, 27, 154, 0.08); text-align: center; border: 1px solid #e1bee7; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+      <div style="text-align: right; margin-bottom: 20px;">
+        <div style="background:#fff3e0; border:1px dashed #ffcc80; padding:12px; border-radius:12px; color:#4a148c; font-weight:600;">
+          <div style="margin-bottom:6px;">הסבר קצר — איך עובדת ההגרלה:</div>
+          <div style="font-weight:400; font-size:0.95em; line-height:1.3;">קודם יש להוסיף חבילות; לפי כמות הכרטיסים שבחבילות תינתן האפשרות להוסיף כרטיסים. רק לאחר שיהיו כרטיסים בחבילות ניתן להוסיף כרטיסים למתנות.</div>
+          @if (cartService.totalTickets() === 0) {
+            <div style="margin-top:8px; color:#d32f2f; font-weight:700;">אין לך כרטיסים בסל — יש להוסיף חבילות כדי להפעיל הוספת כרטיסים.</div>
+          } @else {
+            <div style="margin-top:8px; color:#2e7d32; font-weight:700;">יש לך {{ cartService.totalTickets() }} כרטיסים בסל. כרטיסים זמינים להוספה: {{ cartService.remainingTickets() }}</div>
+          }
+        </div>
+      </div>
+
+      @if (currentGift()) {
+        <div style="margin-bottom: 30px;">
+          <span [style.background]="currentGift()?.isDrawn ? '#e8f5e9' : '#f3e5f5'" [style.color]="currentGift()?.isDrawn ? '#2e7d32' : '#6a1b9a'" style="padding: 8px 25px; border-radius: 50px; font-weight: 800; font-size: 0.9em;">
+            {{ currentGift()?.isDrawn ? 'הגרלה הושלמה ✅' : 'מגרילים כעת' }}
+          </span>
+          <h1 style="color: #4a148c; font-size: 3.5em; margin: 15px 0; font-weight: 900; line-height: 1.1;">{{ currentGift()?.name }}</h1>
+        </div>
+
+        <div [style.background]="isSpinning() ? '#2a0a4a' : (selectedWinner() || currentGift()?.isDrawn ? '#2e7d32' : '#4a148c')"
+             style="height: 220px; border-radius: 35px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; border: 8px solid #ffd700; transition: all 0.5s; box-shadow: 0 15px 35px rgba(0,0,0,0.2); flex-direction: column; gap: 10px;">
+          @if (selectedWinner() || currentGift()?.isDrawn) {
+            <div style="color: #ffd700; font-size: 2em; font-weight: 900;">🏆 הזוכה 🏆</div>
+          }
+<div style="color: white; font-size: 4em; font-weight: 900;">
+  {{ (displayText() && typeof displayText() === 'object') ? 'טוען...' : displayText() }}
+</div>          @if (isSpinning()) { <div class="scanner-effect"></div> }
+        </div>
+
+        <div style="margin-top: 50px; display: flex; justify-content: center; gap: 30px;">
+          <button (click)="startRaffle()" [disabled]="isSpinning() || currentGift()?.isDrawn" style="background: #6a1b9a; color: white; border: none; padding: 20px 50px; border-radius: 60px; font-size: 1.4em; font-weight: bold; cursor: pointer;">🚀 התחל</button>
+          <button (click)="stopRaffle()" [disabled]="!isSpinning()" style="background: #ff5252; color: white; border: none; padding: 20px 50px; border-radius: 60px; font-size: 1.4em; font-weight: bold; cursor: pointer;">🛑 עצור</button>
+        </div>
+      } @else {
+        <div style="text-align: center; color: #999;">
+          <div style="font-size: 5em; margin-bottom: 20px;">🎲</div>
+          <h2>אנא בחר מתנה מהרשימה כדי להתחיל</h2>
+        </div>
+      }
+    </div>
+
+    <div style="background: #4a148c; border-radius: 35px; padding: 25px; color: white; display: flex; flex-direction: column; overflow: hidden; height: 100%;">
+      <h2 style="margin: 0 0 20px 0; font-size: 1.5em; border-bottom: 2px solid rgba(255,255,255,0.15); padding-bottom: 15px; flex-shrink: 0;">
+        🏆 רשימת זוכים
+      </h2>
+      <div style="overflow-y: auto; flex-grow: 1; padding-left: 10px;">
+        @for (item of winnersList(); track item.winner + item.gift) {
+          <div style="background: rgba(255,255,255,0.12); padding: 18px; border-radius: 20px; border-right: 5px solid #ffd700; margin-bottom: 15px;">
+            <div style="font-size: 0.8em; color: #e1bee7; margin-bottom: 5px; font-weight: bold;">🎁 {{ item.gift }}</div>
+            <div style="font-weight: 800; font-size: 1.2em;">{{ item.winner }}</div>
+          </div>
+        }
+      </div>
+      <button (click)="exportWinnersReport()" style="width: 100%; margin-top: 20px; background: #ffd700; color: #4a148c; border: none; padding: 12px; border-radius: 15px; font-weight: 900; cursor: pointer; flex-shrink: 0;">
+        💾 ייצוא דו"ח סופי
+      </button>
+    </div>
+
+  </div>
+</div>

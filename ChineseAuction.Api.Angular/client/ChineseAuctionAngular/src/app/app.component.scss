@@ -1,0 +1,59 @@
+/* 1. נועל את גובה המסך */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 2. סידור ה-Layout - הסל בשמאל והתוכן בימין */
+.main-layout {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 80px); 
+  overflow: hidden;
+  /* flex-direction מבטיח שהסל יהיה בשמאל גם ב-RTL */
+  flex-direction: row-reverse; 
+  direction: rtl; 
+}
+
+/* 3. העגלה - תהיה בצד שמאל הקיצוני של המסך */
+.side-cart {
+  width: 320px;
+  height: 100%;
+  overflow-y: auto;
+  /* ltr דוחף את הפס לקצה השמאלי של המסך */
+  direction: ltr; 
+  border-right: 1px solid #ddd;
+  flex-shrink: 0;
+  background: white;
+}
+
+/* מחזיר את תוכן העגלה לעברית */
+.side-cart > * {
+  direction: rtl;
+}
+
+/* 4. התוכן והפוטר - בצד ימין, גלילה בקצה הימני של המסך */
+.content-and-footer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  /* rtl משאיר את הפס בקצה הימני של המסך */
+  direction: rtl; 
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* עיצוב פסי הגלילה בקצוות */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}

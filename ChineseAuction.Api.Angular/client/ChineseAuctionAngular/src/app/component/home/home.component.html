@@ -1,0 +1,37 @@
+<div class="pastel-viewport">
+  <div class="mountain-bg">
+    <div class="peak p1"></div>
+    <div class="peak p2"></div>
+    <div class="mist"></div>
+  </div>
+
+  <div class="glass-container fade-in">
+    <header class="header-section">
+      <span class="tag">#מתנת_חיים</span>
+      <h1 class="title">מתנה של <span class="highlight">נתינה</span></h1>
+      <p class="subtitle">מצילים חיים ברוגע ובסטייל פסטלי.</p>
+    </header>
+
+    <div class="actions-grid">
+      <button class="pastel-card donation" pRipple routerLink="/package">
+        <div class="icon-box"><i class="pi pi-heart"></i></div>
+        <div class="content">
+          <strong>רכישה </strong>
+          <span>היו שותפים להצלת חיים</span>
+        </div>
+      </button>
+
+      <button class="pastel-card catalog" pRipple routerLink="/gift">
+        <div class="icon-box"><i class="pi pi-images"></i></div>
+        <div class="content">
+          <strong>קטלוג מתנות</strong>
+          <span>הפרסים שמחכים לכם</span>
+        </div>
+      </button>
+    </div>
+
+    <footer class="admin-glass-dock" *ngIf="isAdmin">
+      <div class="dock-label">ניהול מערכת</div>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="participants-container" style="direction: rtl; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; width: 100%; box-sizing: border-box;">
+  
+  <h2 style="color: #4a148c; border-bottom: 2px solid #e1bee7; padding-bottom: 10px; margin-bottom: 20px;">
+    רשימת רוכשים למתנה: <span style="color: #9c27b0;">{{ giftName }}</span>
+  </h2>
+
+  @if (buyers() && buyers().length > 0) {
+    <div style="box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 8px; background: white; width: 100%;">
+      <table style="width: 100%; border-collapse: collapse; table-layout: auto;">
+        <thead>
+          <tr style="background-color: #f3e5f5; color: #4a148c; text-align: right;">
+            <th style="padding: 15px; border-bottom: 2px solid #ce93d8; white-space: nowrap;">שם מלא</th>
+            <th style="padding: 15px; border-bottom: 2px solid #ce93d8; white-space: nowrap;">עיר</th>
+            <th style="padding: 15px; border-bottom: 2px solid #ce93d8; white-space: nowrap;">אימייל</th>
+            <th style="padding: 15px; border-bottom: 2px solid #ce93d8; white-space: nowrap;">טלפון</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (buyer of buyers(); track $index) {
+            <tr style="border-bottom: 1px solid #f1f1f1; transition: background 0.3s;" 
+                onmouseover="this.style.backgroundColor='#fdfbff'" 
+                onmouseout="this.style.backgroundColor='transparent'">
+              
+              <td style="padding: 12px 15px; font-weight: 600; color: #333;">
+                {{ buyer.firstName }} {{ buyer.lastName }}
+              </td>
+              
+              <td style="padding: 12px 15px; color: #666;">
+                <span style="display: flex; align-items: center; gap: 5px;">
+                  📍 {{ buyer.city || 'לא צוין' }}
+                </span>
+              </td>
+              
+              <td style="padding: 12px 15px;">
+                <a href="mailto:{{ buyer.email }}" style="color: #6a1b9a; text-decoration: none; font-size: 0.9em; word-break: break-all;">
+                  📧 {{ buyer.email }}
+                </a>
+              </td>
+              
+              <td style="padding: 12px 15px; color: #2e7d32; direction: ltr; text-align: right; white-space: nowrap;">
+                📞 {{ buyer.phone }}
+              </td>
+              
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    
+    <div style="margin-top: 15px; text-align: left; color: #777; font-size: 0.9em;">
+      סה"כ רוכשים: <strong>{{ buyers().length }}</strong>
+    </div>
+
+  } @else {
+    <div style="text-align: center; padding: 40px; background: #f9f9f9; border-radius: 8px; border: 1px dashed #ccc;">
+      <p style="color: #999; font-size: 1.2em;">טרם נרכשו כרטיסים למתנה זו.</p>
+    </div>
+  }
+</div>

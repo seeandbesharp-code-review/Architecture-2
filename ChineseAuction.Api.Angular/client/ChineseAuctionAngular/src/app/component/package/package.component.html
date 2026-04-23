@@ -1,0 +1,50 @@
+<div class="packages-container" dir="rtl">
+  <h2 class="section-title">שלב 1: בחירת חבילות כרטיסים</h2>
+
+  <div class="packages-grid">
+    @for (packageItem of packages(); track packageItem.idPackage) {
+      <div class="package-card" [style.background]="getPackageGradient(packageItem.idPackage)">
+        
+        @if($any(packageItem).amountPremium > 0) {
+          <div class="premium-badge-glass">
+            <i class="pi pi-star-fill"></i>
+            <span>PREMIUM</span>
+          </div>
+        }
+
+        <div class="card-content">
+          <span class="label-mini">חבילת</span>
+          <h3 class="main-title">{{ packageItem.amountRegular }} כרטיסים</h3>
+          <div class="price-bubble">
+            <span class="currency">₪</span>
+            <span class="amount">{{ packageItem.price }}</span>
+          </div>
+
+          <div class="bonus-highlight" [class.hidden]="$any(packageItem).amountPremium <= 0">
+            <div class="bonus-inner">
+              <span class="gift-icon">🎁</span>
+              <div class="bonus-text">
+                ועוד <strong>{{ $any(packageItem).amountPremium }}</strong> כרטיסי פרימיום!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-wrapper">
+          <img [src]="imageUrl + ($any(packageItem).image || getPackageImage(packageItem.idPackage))" 
+               class="package-img" 
+               alt="חבילה" />
+        </div>
+
+        <div class="action-footer">
+          <div class="quantity-pill">
+            <button class="qty-btn" (click)="handlePackageUpdate(packageItem.idPackage, 'increment')">+</button>
+            <span class="qty-val">{{ packageQuantities()[packageItem.idPackage] || 0 }}</span>
+            <button class="qty-btn" (click)="handlePackageUpdate(packageItem.idPackage, 'decrement')">-</button>
+          </div>
+          <span class="add-text">להוספה לסל</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

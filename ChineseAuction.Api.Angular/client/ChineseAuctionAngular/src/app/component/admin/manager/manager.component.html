@@ -1,0 +1,26 @@
+<div class="manager-layout">
+  <nav class="side-nav">
+    <div class="nav-header">
+      <h3>לוח בקרה</h3>
+    </div>
+    
+    <button routerLink="donor" routerLinkActive="active-link" class="nav-btn">
+      <span class="icon">👥</span> ניהול תורמים
+    </button>
+   
+    <button routerLink="manage-gifts" routerLinkActive="active-link" class="nav-btn">
+      <span class="icon">🎁</span> ניהול פרסים
+    </button>
+    
+    <button routerLink="raffle" routerLinkActive="active-link" class="nav-btn">
+      <span class="icon">🎲</span> הגרלות
+    </button>
+    <button routerLink="revenue" routerLinkActive="active-link" class="nav-btn">
+      <span class="icon">💰</span> הכנסות
+    </button>
+  </nav>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
