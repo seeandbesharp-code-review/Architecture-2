@@ -1,3 +1,8 @@
+// MongoOrderDocument.cs - מודל מסמך MongoDB להזמנות
+// קובץ זה מגדיר את מבנה המסמך ב-MongoDB עבור הזמנות
+// במקום טבלאות מקושרות ב-SQL, כאן יש מסמך אחד עם מערכים משובצים
+// של מתנות וחבילות. זה מאפשר שאילתות מהירות יותר ומודל נתונים גמיש יותר
+
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace ChineseAuctionAPI.Models

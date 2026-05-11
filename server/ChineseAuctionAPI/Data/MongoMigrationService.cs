@@ -1,3 +1,8 @@
+// MongoMigrationService.cs - שירות להעברת נתונים מ-SQL Server ל-MongoDB
+// קובץ זה מכיל לוגיקה להעברת נתוני הזמנות ממסד נתונים רלציוני (SQL Server)
+// למסד נתונים דוקומנטרי (MongoDB). השירות מבצע המרה של טבלאות מקושרות
+// למסמכים משובצים (embedded documents) ב-MongoDB תוך שמירה על קשרי הגומלין
+
 using ChineseAuctionAPI.Models;
 using MongoDB.Driver;
 using Microsoft.EntityFrameworkCore;

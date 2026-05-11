@@ -1,3 +1,13 @@
+// Program.cs - נקודת הכניסה הראשית של האפליקציה ASP.NET Core
+// קובץ זה מגדיר את כל ההגדרות של האפליקציה כולל:
+// - הגדרות לוגינג עם Serilog
+// - חיבור ל-MongoDB ול-SQL Server
+// - הגדרות אימות JWT
+// - חיבור ל-Redis לצורך קאשינג
+// - רישום כל השירותים והרפוזיטוריז ב-DI Container
+// - הגדרות CORS לאפליקציית Angular
+// - הגדרות Swagger לתיעוד API
+
 using System.Text;
 using ChineseAuctionAPI.Data;
 using ChineseAuctionAPI.Repositories;

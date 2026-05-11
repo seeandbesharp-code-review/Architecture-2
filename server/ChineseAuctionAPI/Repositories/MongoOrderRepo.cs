@@ -1,3 +1,8 @@
+// MongoOrderRepo.cs - רפוזיטורי להזמנות במסד נתונים MongoDB
+// קובץ זה מיישם את ממשק IOrderRepo באמצעות MongoDB במקום SQL Server
+// מכיל לוגיקה מורכבת לניהול הזמנות כולל חישוב כרטיסים, הוספה/עדכון מתנות וחבילות
+// ומעבר בין מסמכי MongoDB לבין אובייקטי Domain Models
+
 using System.Linq;
 using ChineseAuctionAPI.DTOs;
 using ChineseAuctionAPI.Models;

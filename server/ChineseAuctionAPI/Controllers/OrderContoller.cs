@@ -1,4 +1,9 @@
-﻿using ChineseAuctionAPI.DTOs;
+﻿// OrdersController.cs - קונטרולר API לניהול הזמנות
+// קובץ זה מכיל את כל נקודות הקצה (endpoints) לניהול הזמנות במערכת
+// כולל הצגת הזמנות, דוחות הכנסות, השלמת הזמנות והוספת מתנות/חבילות
+// הקונטרולר משתמש בשירות IOrderService לביצוע הלוגיקה העסקית
+
+using ChineseAuctionAPI.DTOs;
 using ChineseAuctionAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using static ChineseAuctionAPI.Controllers.PackagesController;

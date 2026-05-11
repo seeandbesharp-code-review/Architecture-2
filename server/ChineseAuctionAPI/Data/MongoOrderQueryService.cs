@@ -1,3 +1,8 @@
+// MongoOrderQueryService.cs - שירות מתמחה לביצוע שאילתות מורכבות על מסד נתונים MongoDB
+// קובץ זה מכיל שירות ייעודי לביצוע שאילתות מתקדמות על אוסף ההזמנות ב-MongoDB
+// כולל שאילתות עם פילטרים מורכבים ואגרגציות (aggregation pipelines)
+// השירות משתמש ב-MongoDB.Driver לביצוע פעולות LINQ-like על מסמכי MongoDB
+
 using ChineseAuctionAPI.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
