@@ -13,6 +13,8 @@ using ChineseAuctionAPI.Data;
 using ChineseAuctionAPI.Repositories;
 using ChineseAuctionAPI.Services;
 using ChineseAuctionAPI.Services.Caching;
+using ChineseAuctionAPI.Services.RateLimiting;
+using ChineseAuctionAPI.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -103,6 +105,9 @@ try
     var redisConnection = ConnectionMultiplexer.Connect(configurationOptions);
     builder.Services.AddSingleton<IConnectionMultiplexer>(redisConnection);
     builder.Services.AddScoped<ICacheService, RedisCacheService>();
+
+    // ===== Register Rate Limiting Service (Sliding Window) =====
+    builder.Services.AddScoped<IRateLimitingService, RateLimitingService>();
 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
