@@ -189,6 +189,7 @@ db.orders.aggregate([
   },
   {
     $project: {
+<<<<<<< HEAD
       status: "$_id",
       totalRevenue: 1,
       orderCount: 1,
@@ -261,3 +262,22 @@ db.orders.aggregate([
 - כל הנתונים נשמרים ב-MongoDB המקומי
 - ה-ID שלנו עוקב אחרי הקשרים בין הטבלאות (categoryId, userId, וכו')
 - ה-Aggregation מעבד מעל 1000 הזמנות בצורה יעילה
+=======
+      status: '$_id',
+      totalRevenue: 1,
+      count: 1,
+      _id: 0
+    }
+  }
+]);
+```
+
+## הפעלת השאילתות ב-MongoDB Compass
+1. פתח את MongoDB Compass.
+2. התחבר ל-`mongodb://localhost:27017`.
+3. בחר את מסד הנתונים `ChineseAuctionDB`.
+4. בחר טאב **Playground**.
+5. הדבק את כל הקוד של Seed (מהקובץ mongo-store-seed.js) והריץ את זה קודם.
+6. ואז הדבק כל שאילתה בנפרד בחלון Playground וריץ.
+7. עבור Aggregation בחלונית החדשה, בחר **Aggregation** במקום **Playground**.
+>>>>>>> e2f960e19698783feaf53e80b4c52d45ce556d9f
